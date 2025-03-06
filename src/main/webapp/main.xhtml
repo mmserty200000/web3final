@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+    PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="jakarta.faces.html" xmlns:ui="jakarta.faces.facelets"
+    xmlns:f="jakarta.faces.core" xmlns:p="primefaces">
+<f:view contentType="text/html;charset=UTF-8" encoding="UTF-8">
+    <h:head>
+        <title>mmserty lab</title>
+        <meta charset="utf-8" />
+        <link rel="stylesheet" href="styles/main.css" />
+    </h:head>
+    <h:body>
+        <div class="credits-container">
+            Черепанов Иван 409830
+            <h:link outcome="toIndex" style="color: white;">
+                вернуться в дурку
+            </h:link>
+            <h:form style="display:inline;">
+                <h:commandLink action="#{userIOBean.resetTable()}" value="сбросить таблицу"
+                    onClick="window.location.reload();" style="color: white;" />
+            </h:form>
+        </div>
+        <div class="top-content-container">
+            <div class="user-input-container">
+                <h:form id="pointForm" styleClass="input-form">
+                    <div class="input-container radio-input-container">
+                        <h:outputLabel styleClass="input-label" value="X:" for="xvalue" />
+                        <p:selectOneRadio id="xvalue" value="#{userIOBean.manualxvalue}" required="true"
+                            requiredMessage="X must be choosen" styleClass="radio-input">
+                            <f:selectItems value="#{userIOBean.getXvalueslist()}" />
+                        </p:selectOneRadio>
+                    </div>
+
+                    <div class="input-container">
+                        <h:outputLabel styleClass="input-label" value="Y:" for="yvalue" />
+                        <p:inputText id="yvalue" value="#{userIOBean.manualyvalue}" title="(-5...3)"
+                            validatorMessage="Y must be in (-5;3)" required="true" requiredMessage="Y must be choosen"
+                            styleClass="text-input">
+                            <f:validateDoubleRange minimum="-5" maximum="3" />
+                        </p:inputText>
+                    </div>
+
+                    <div class="input-container radio-input-container">
+                        <h:outputLabel styleClass="input-label" value="R:" for="rvalue" />
+                        <p:selectOneRadio id="rvalue" value="#{userIOBean.rvalue}" widgetVar="rvalue" required="true"
+                            requiredMessage="R must be choosen" styleClass="radio-input">
+                            <f:selectItems value="#{userIOBean.getRvalueslist()}" />
+                            <f:ajax event="change" listener="#{userIOBean.rChange()}" process="@this" update="" />
+                        </p:selectOneRadio>
+                    </div>
+                    <h:commandButton value="Send" type="button" styleClass="submit-button">
+                        <f:ajax
+                            listener="#{userIOBean.sendPoint(userIOBean.manualxvalue,userIOBean.manualyvalue,userIOBean.rvalue)}"
+                            execute="@form" render="results-table pointForm" />
+                    </h:commandButton>
+                    <div class="input-container">
+                        <h:messages style="color:red" styleClass="messages" />
+                    </div>
+                </h:form>
+                <h:form id="hidden-form">
+                    <h:inputHidden value="#{userIOBean.xvalue}" id="hiddenx" />
+                    <h:inputHidden value="#{userIOBean.yvalue}" id="hiddeny" />
+                    <h:commandButton id="hiddensubmit" style="display:none;">
+                        <f:ajax
+                            listener="#{userIOBean.sendPoint(userIOBean.xvalue,userIOBean.yvalue,userIOBean.rvalue)}"
+                            execute="@form" render="results-table" />
+                    </h:commandButton>
+                </h:form>
+            </div>
+            <div id="canvas-container">
+                <canvas id="static-canvas" width="400" height="400"></canvas>
+                <canvas id="dynamic-canvas" width="400" height="400"></canvas>
+            </div>
+
+
+        </div>
+        <div id="results-table-container">
+            <h:dataTable id="results-table" value="#{userIOBean.results}" var="result" border="1">
+                <h:column>
+                    <f:facet name="header">X</f:facet>
+                    <h:outputText value="#{result.getX()}">
+                        <f:convertNumber type="number" maxFractionDigits="3" minFractionDigits="1" />
+                    </h:outputText>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Y</f:facet>
+                    <h:outputText value="#{result.getY()}">
+                        <f:convertNumber type="number" maxFractionDigits="3" minFractionDigits="1" />
+                    </h:outputText>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">R</f:facet>
+                    <h:outputText value="#{result.getR()}">
+                        <f:convertNumber type="number" maxFractionDigits="3" minFractionDigits="1" />
+                    </h:outputText>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Execution time</f:facet>
+                    <h:outputText value="#{result.getExecution_time()}">
+                        <f:convertNumber type="number" maxFractionDigits="4" minFractionDigits="4" />
+                    </h:outputText> ms
+                </h:column>
+                <h:column>
+                    <h:outputText value="#{result.getTimestamp()}">
+                        <f:convertDateTime pattern="dd.MM.yyyy HH:mm:ss" timeZone="Europe/Moscow" />
+                    </h:outputText>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Result</f:facet>
+                    #{result.isSuccess() ? "Inside" : "Outside"}
+                </h:column>
+            </h:dataTable>
+        </div>
+        <script type="text/javascript" src="script/main.js"></script>
+        <script>
+            function redrawDots() {
+                drawStaticCanvas(#{ userIOBean.rvalue });
+                <ui:repeat value="#{userIOBean.results}" var="result">
+                    addPoint(#{result.getX()}, #{result.getY()}, #{result.getR()}, #{result.isSuccess() ? "true" : "false"});
+                </ui:repeat>
+            }
+        </script>
+    </h:body>
+</f:view>
+
+</html>

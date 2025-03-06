@@ -1,0 +1,20 @@
+plugins {
+    id 'java'
+    id 'war'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+  compileOnly('jakarta.platform:jakarta.jakartaee-web-api:10.0.0')
+  implementation ('org.primefaces:primefaces:14.0.5:jakarta')
+  implementation 'com.google.code.gson:gson:2.12.1'
+  implementation 'org.postgresql:postgresql:42.7.2'
+  implementation 'org.projectlombok:lombok:1.18.34'
+  annotationProcessor 'org.projectlombok:lombok:1.18.34'
+}
+
+description = 'lab3'
+java.sourceCompatibility = JavaVersion.VERSION_17

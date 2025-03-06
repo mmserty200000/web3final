@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+    PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="jakarta.faces.html" lang="ru">
+
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="stylesheet" href="styles/index.css"/>
+</head>
+
+<body>
+    <button id="startButton" class="simpleButton" style="margin: 0 auto;">Мне повезёт!</button>
+    <div id="escapeButtonContainer"> 
+        <h:button type="button" class="simpleButton" outcome="toMain" value="убежать" /> 
+    </div>
+    <div class="svg-container" id="svgContainer">
+
+        <svg id="eye1" width="100" height="100" viewBox="0 0 50 50">
+            <circle cx="25" cy="25" r="10" fill="white" stroke="black" stroke-width="1" />
+            <line id="minuteHand" x1="25" y1="25" x2="25" y2="17" stroke="black" stroke-width="2" stroke-linecap="round"
+                transform="rotate(0 25 25)" /> 
+        </svg>
+
+        <svg id="eye2" width="100" height="100" viewBox="0 0 50 50">
+            <circle cx="25" cy="25" r="10" fill="white" stroke="black" stroke-width="1" />
+            <line id="hourHand" x1="25" y1="25" x2="25" y2="20" stroke="black" stroke-width="2" stroke-linecap="round"
+                transform="rotate(0 25 25)" /> 
+        </svg>
+
+        <img src="svg/nya_no_hand.svg" height="500" width="500" id="mainFigure" />
+
+        <img src="svg/hand_down.svg" height="500" width="500" id="hand1" class="hand" />
+        <img src="svg/hand_mid_down.svg" height="500" width="500" id="hand2" class="hand" />
+        <img src="svg/hand_mid.svg" height="500" width="500" id="hand3" class="hand" />
+        <img src="svg/hand_mid_up.svg" height="500" width="500" id="hand4" class="hand" />
+        <img src="svg/hand_up.svg" height="500" width="500" id="hand5" class="hand" />
+
+        <img src="svg/nya_only_nya.svg" height="500" width="500" id="mouth1" class="mouth" />
+        <img src="svg/nya_middle.svg" height="500" width="500" id="mouth2" class="mouth" />
+        <img src="svg/nya_minim.svg" height="500" width="500" id="mouth3" class="mouth" />
+
+        <audio id="helloAudio" src="sound/hello_everynyan.mp3"></audio>
+        <audio id="iwishAudio" src="sound/i_wish.mp3"></audio>
+        
+    </div>
+
+    <script src="script/index.js"></script>
+</body>
+
+</html>

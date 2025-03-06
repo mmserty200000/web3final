@@ -1,0 +1,197 @@
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    background-color: #333;
+    color: #eee;
+    font-family: sans-serif;
+    overflow: auto;
+}
+
+.credits-container {
+    margin-top: 2vw;
+    font-size: 10px;
+}
+
+.user_input_container {
+    display: flex;
+    width: 50%;
+    gap: 20px;
+    align-items: flex-start;
+    padding: 20px;
+    box-sizing: border-box;
+    justify-content: center;
+    text-align: center; /* Добавлено для центрирования кнопки Send */
+}
+
+.top-content-container {
+    display: flex;
+    width: 80vw;
+    margin-bottom: 20px;
+    margin-top: 5vw;
+}
+
+.right-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    overflow-y: auto;
+
+}
+
+.left-panel {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 0 0 auto;
+    user-select: none;
+}
+
+#canvas-container {
+    position: relative; /* Контейнер для позиционирования */
+    width: 400px;  /* Задайте нужные размеры */
+    height: 400px; /* Задайте нужные размеры */
+}
+
+#canvas-container > #static-canvas {
+    position: absolute; /* Абсолютное позиционирование для перекрытия */
+    top: 0;
+    left: 0;
+    z-index: 1; /* Статический канвас ниже */
+}
+
+#canvas-container > #dynamic-canvas {
+    position: absolute; /* Абсолютное позиционирование для перекрытия */
+    top: 0;
+    left: 0;
+    z-index: 2; /* Динамический канвас выше */
+    background-color: transparent; /* Прозрачный фон для динамического канваса */
+}
+
+#results-table-container {
+    margin-top: 0;
+    overflow-x: auto;
+    width: 80vw;
+    max-width: 1200px;
+    max-height: 20vw;
+    display: flex;
+    justify-content: flex-start;
+}
+
+#results-table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+#results-table th{
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    transform: translateY(-2%);
+}
+#results-table th,
+#results-table td {
+    border: 1px solid #555;
+    padding: 8px;
+    text-align: left;
+}
+
+#results-table th {
+    background-color: #444;
+}
+
+.user-input-container {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    gap: 15px;
+    align-items: stretch;
+    padding: 15px;
+    box-sizing: border-box;
+    justify-content: center;
+    border-radius: 5px;
+}
+
+.input-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: start;
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+.input-container:last-child {
+    margin-bottom: 0;
+}
+
+.input-label {
+    width: 50px;
+    text-align: right;
+    flex-shrink: 0;
+    color: #eee;
+    font-weight: bold;
+    padding-right: 10px;
+}
+
+/* Сдвиг лейбла вниз для radio-input */
+.input-container.radio-input-container .input-label {
+    position: relative;
+    transform: translateY(5%); /* Сдвигаем на 5% вниз */
+    display: inline-block; /* Ensure label is inline-block for transform to work predictably */
+}
+
+
+
+.radio-input,
+.text-input {
+    color: #eee;
+    box-sizing: border-box;
+    flex-grow: 1;
+    min-width: 100px;
+}
+
+.text-input {
+    flex-grow: 0.5;
+    background-color: #555; 
+}
+
+.input-container .radio-input .ui-radiobutton-box {
+    border-color: #777;
+    background-color: #555;
+}
+
+.radio-input .ui-radiobutton-label {
+    color: #eee;
+}
+
+.submit-button {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    background-color: #666;
+    color: #eee;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.3s ease;
+    margin-top: 15px;
+    /* align-self: center;  Убираем align-self, text-align на user-input-container должен центрировать */
+    width: fit-content; /* Ensure button width is based on content */
+    margin-left: auto; /* Авто-отступы слева и справа для центрирования в блочном контексте */
+    margin-right: auto;
+    display: block; /* Make button block-level for margin auto to work correctly */
+}
+
+.submit-button:hover {
+    background-color: #777;
+}
+
+.messages {
+    color: red;
+    margin-top: 5px;
+    font-size: 0.9em;
+}

@@ -1,0 +1,110 @@
+body {
+    margin: 0;
+    display: flex; /* Уже есть, оставляем */
+    justify-content: center; /* Уже есть, обеспечивает центрирование по горизонтали */
+    align-items: center; /* Уже есть, обеспечивает центрирование по вертикали для содержимого body, но мы это немного изменим */
+    min-height: 100vh;
+    background-color: #dde1e3;
+    overflow: hidden;
+    background-image: url('../1740398275774.png');
+    background-size: 100% auto;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    flex-direction: column; /* Добавим это, чтобы элементы body располагались вертикально */
+}
+
+.simpleButton {
+    scale: 150%;
+    z-index: 4;
+    display: block;
+    background-color: #f8f9fa;
+    border: 1px solid #dadce0;
+    border-radius: 4px;
+    padding: 8px 16px;
+    font-size: 14px;
+    color: #3c4043;
+    cursor: pointer;
+    outline: none;
+    transition: background-color 0.2s ease;
+    margin-bottom: 20px; /* Добавим отступ снизу для кнопки "Мне повезёт!", чтобы отделить от нижней кнопки */
+}
+.simpleButton:hover {
+    background-color: #e8eaed;
+    border-color: #dadce0;
+}
+
+.svg-container {
+    position: absolute;
+    top: -600px;
+    left: 70%;
+    transform: translateX(-50%) scale(1.5);
+    transition: top 3.2s ease-out;
+    z-index: 10;
+    pointer-events: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.svg-container.out {
+    top: 150px;
+    pointer-events: auto;
+}
+
+#mainFigure {
+    display: block;
+    z-index: 1;
+}
+.hand {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: none;
+    z-index: 0;
+}
+
+.hand:first-child {
+    display: block;
+}
+
+#eye1, #eye2 {
+    position: absolute;
+    top: 12%;
+    z-index: 2;
+}
+
+#eye1 {
+    left: 44.5%;
+    transform: translateX(-50%);
+}
+
+#eye2 {
+    left: 55.5%;
+    transform: translateX(-50%);
+}
+
+
+.mouth {
+    position: absolute;
+    top: 50%;
+    left: 47%;
+    transform: translate(-50%, -50%);
+    display: none;
+    z-index: 2;
+}
+
+.mouth:first-child {
+    display: block;
+}
+
+/* Стили для кнопки "убежать" */
+#escapeButtonContainer {
+    position: fixed; /* Фиксированное позиционирование относительно viewport */
+    bottom: 20px; /* Отступ от нижнего края экрана */
+    right: auto; /* Отступ от правого края экрана */
+    z-index: 4; /* Убедитесь, что кнопка поверх фона */
+    font-size: 14px;
+}
+
+/* Убираем лишние стили из div-обертки кнопки "убежать" в HTML */
+
